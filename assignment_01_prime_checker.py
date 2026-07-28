@@ -35,3 +35,57 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def is_prime(n):
+    """
+    Check if a number is a prime
+    
+    Args:
+        n (int): The number to check
+        
+    Returns:
+        bool: True if n is prime, False otherwise
+    """
+    # Numbers less than two are not prime numbers
+    if n < 2:
+        return False
+
+    # 2 is the only even prime number
+    if n == 2:
+        return True
+
+    # All other even numbers are not prime numbers
+    if n % 2 == 0:
+        return False
+
+    # Check odd divisors from 3 up to the square root of n
+    # If n has a divisor greater than it's square root, that divisor must have a divisor smaller than the square root of n
+    for divisor in range(3, int(n ** 0.5) + 1, 2):
+        if n % divisor == 0:
+            return False
+
+    # If no divisor is found, n is a prime number
+    return True
+
+
+
+# MAIN BLOCK
+
+
+
+if __name__ == "__main__":
+    # Get user input
+    user_input = input("Enter a number: ")
+
+    try:
+        number = int(user_input)
+
+        #Call the function and check the result
+        if is_prime(number):
+            print(f"{number} is a prime number.")
+        else:
+            print(f"{number} is not a prime number.")
+
+    except ValueError:
+        print("Error: please enter a valid integer.")
+
+    
