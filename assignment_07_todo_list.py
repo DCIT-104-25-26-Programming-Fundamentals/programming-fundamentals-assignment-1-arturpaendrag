@@ -79,3 +79,149 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+# =============================================================================
+# FUNCTION 1 — Add a Task
+# =============================================================================
+ 
+def add_task(tasks):
+    """
+    Prompt the user to enter a task and add it to the list.
+    
+    Args:
+        tasks (list): The list of tasks
+    """
+    task_description = input("Enter task: ").strip()
+    
+    # Only add if the user entered something
+    if task_description:
+        tasks.append(task_description)
+        print(f"Task added: \"{task_description}\"\n")
+    else:
+        print("Error: Task cannot be empty. Please try again.\n")
+ 
+ 
+# =============================================================================
+# FUNCTION 2 — View All Tasks
+# =============================================================================
+ 
+def view_tasks(tasks):
+    """
+    Display all tasks in the list with their numbers.
+    If the list is empty, display a friendly message.
+    
+    Args:
+        tasks (list): The list of tasks
+    """
+    # Check if the list is empty
+    if len(tasks) == 0:
+        print("Your to-do list is empty. Add a task to get started!\n")
+    else:
+        print("Your Tasks:")
+        for i in range(len(tasks)):
+            print(f"{i + 1}. {tasks[i]}")
+        print()
+ 
+ 
+# =============================================================================
+# FUNCTION 3 — Delete a Task
+# =============================================================================
+ 
+def delete_task(tasks):
+    """
+    Display all tasks, ask the user which task to delete, and remove it.
+    Handles invalid task numbers gracefully.
+    
+    Args:
+        tasks (list): The list of tasks
+    """
+    # First, check if there are any tasks to delete
+    if len(tasks) == 0:
+        print("Your to-do list is empty. Nothing to delete.\n")
+        return
+    
+    # Show all tasks
+    print("Your Tasks:")
+    for i in range(len(tasks)):
+        print(f"{i + 1}. {tasks[i]}")
+    print()
+    
+    # Ask which task to delete
+    try:
+        task_number = int(input("Enter task number to delete: "))
+        
+        # Validate the task number
+        if task_number < 1 or task_number > len(tasks):
+            print(f"Error: Please enter a number between 1 and {len(tasks)}.\n")
+        else:
+            # Remove the task (convert to 0-based index)
+            removed_task = tasks.pop(task_number - 1)
+            print(f"Task \"{removed_task}\" has been removed.\n")
+    
+    except ValueError:
+        print("Error: Please enter a valid number.\n")
+ 
+ 
+# =============================================================================
+# FUNCTION 4 — Display Menu
+# =============================================================================
+ 
+def display_menu():
+    """
+    Display the main menu options.
+    """
+    print("=" * 30)
+    print("     TO-DO LIST MENU")
+    print("=" * 30)
+    print("1. Add task")
+    print("2. View tasks")
+    print("3. Delete task")
+    print("4. Quit")
+    print("=" * 30)
+ 
+ 
+# =============================================================================
+# MAIN BLOCK
+# =============================================================================
+ 
+def main():
+    """
+    Main program loop that runs the to-do list application.
+    """
+    # Initialize the tasks list
+    tasks = []
+    
+    print("\n" + "=" * 30)
+    print("   WELCOME TO YOUR TO-DO LIST")
+    print("=" * 30 + "\n")
+    
+    # Main menu loop
+    while True:
+        display_menu()
+        choice = input("Enter your choice (1-4): ").strip()
+        
+        if choice == "1":
+            # Add a task
+            add_task(tasks)
+        
+        elif choice == "2":
+            # View all tasks
+            print()
+            view_tasks(tasks)
+        
+        elif choice == "3":
+            # Delete a task
+            print()
+            delete_task(tasks)
+        
+        elif choice == "4":
+            # Quit
+            print("\nGoodbye!\n")
+            break
+        
+        else:
+            # Invalid choice
+            print("Error: Please enter a valid choice (1-4).\n")
+ 
+ 
+if __name__ == "__main__":
+    main()
